@@ -1,4 +1,4 @@
 export const appConfig = {
-  name: "Workspace Template",
-  description: "Maison-style full-stack starter for Howard agent projects.",
+  name: "ScaleGate Ledger",
+  description: "地磅、進出場與掩埋作業的可追溯營運工作台。",
 } as const;
