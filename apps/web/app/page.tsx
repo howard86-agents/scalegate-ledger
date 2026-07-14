@@ -16,7 +16,17 @@ const toneClass = {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-surface text-ink">
+    <main
+      className="min-h-screen bg-surface text-ink"
+      id="main-content"
+      tabIndex={-1}
+    >
+      <a
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-3 focus:font-semibold focus:text-white focus-visible:outline-2 focus-visible:outline-brand-200 focus-visible:outline-offset-2"
+        href="#main-content"
+      >
+        跳至主要內容
+      </a>
       <header className="border-line border-b bg-panel">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 lg:px-8">
           <div>
