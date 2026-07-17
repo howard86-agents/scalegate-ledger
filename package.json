@@ -18,7 +18,8 @@
     "generate": "turbo run generate",
     "lint": "ultracite check",
     "prepare": "husky",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "verify:dashboard": "bun run scripts/verify-dashboard-accessibility.ts"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,md,yml,yaml}": "ultracite fix"

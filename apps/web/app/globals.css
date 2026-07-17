@@ -33,3 +33,8 @@
 body {
   background: var(--color-surface);
 }
+
+:focus-visible {
+  outline: 3px solid var(--color-brand-600);
+  outline-offset: 3px;
+}
