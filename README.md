@@ -1,27 +1,38 @@
-# workspace-template
+# ScaleGate Ledger
 
-Maison-style full-stack Turborepo template for Howard agent projects.
+ScaleGate Ledger is a Traditional Chinese operations workspace for traceable vehicle visits, weighbridge records, charge calculations, landfill daily logs, and exception handling. The current Stage-1 bootstrap is an interface and architecture foundation only: its dashboard uses static presentation data and does not operate site equipment or connect to production services.
 
 ## Stack
 
-- Bun workspace + Turborepo
-- Next.js app in `apps/web`
-- Tailwind CSS v4 as the default styling layer (CSS-first config; brand tokens in `apps/web/app/globals.css`)
-- Bun CLI starter in `apps/cli`
-- Shared data package in `packages/data`
-- Prisma/Postgres package in `packages/database`
-- Shared TypeScript configs in `packages/config-typescript`
-- Ultracite/Biome, Husky, Commitlint, Gitleaks, Typos, Dependabot, GitHub Actions CI
+- Bun workspace and Turborepo
+- Next.js and Tailwind CSS v4 in `apps/web`
+- Shared static/domain data in `packages/data`
+- Deferred Prisma/Postgres scaffold in `packages/database`
+- Shared TypeScript configuration in `packages/config-typescript`
+- Ultracite/Biome, Husky, Commitlint, Gitleaks, Typos, Dependabot, and GitHub Actions CI
+
+## Current product surface
+
+The responsive PC/tablet dashboard shell presents four approved Phase-1 concepts:
+
+- visit queue and manually reviewed workflow states;
+- gross, tare, net weight, and charge summary;
+- landfill daily operational log summary;
+- exception queue with explicit human review.
+
+All values shown on the page are static demonstration data. They are not live measurements, financial records, or completed transactions.
+
+## Explicit boundaries
+
+Stage 1 does not implement authentication or authorization, database models or migrations, hardware/device adapters, plate recognition, direct gate or traffic-light control, external APIs, accounting/payment flows, production configuration, deployment, or secrets. Database, authentication, hosting, offline behavior, and every device/integration boundary remain deferred pending discovery and explicit acceptance.
+
+ScaleGate Ledger must not be treated as a fail-safe controller for gates, vehicles, weighbridges, PLCs, or safety interlocks. Unverified automatic plate or weight results must never bypass an agreed human exception process.
 
 ## Setup
 
 ```sh
 brew install bun gitleaks typos-cli
 bun install
-cp .env.sample .env.local
-docker compose up -d db
-bun run generate
-bun run db:push
 bun run dev
 ```
 
@@ -32,9 +43,6 @@ bun run check       # Ultracite lint/check
 bun run fix         # Ultracite autofix
 bun run typecheck   # Turbo typecheck across workspaces
 bun run build       # Turbo build
-bun run generate    # Prisma generate
-bun run db:push     # Push Prisma schema to local DB
-bun run db:seed     # Seed local DB
 bun run dev         # Run persistent dev tasks
 ```
 
@@ -53,11 +61,6 @@ Build is intentionally not in CI by default; Vercel previews should own app buil
 
 Read `AGENTS.md` before editing. Keep work issue-scoped, inspect code first, make atomic conventional commits, run checks, and document stack/base notes for dependent PRs.
 
-## Customizing a generated repo
+## Delivery posture
 
-1. Replace `workspace-template` and `@workspace-template/*` package names with the project namespace.
-2. Update `CONTEXT.md` with product-specific goals and non-goals.
-3. Replace the starter homepage and seed data.
-4. Retune brand tokens in `apps/web/app/globals.css` (`@theme`) and swap the font in `apps/web/app/layout.tsx`.
-5. Add product models to `packages/database/prisma/schema.prisma`.
-6. Keep quality gates intact unless the repo explicitly chooses different gates.
+Read `CONTEXT.md` and `AGENTS.md` before implementation. Keep one accepted delivery issue per branch/PR after the phased issue graph is approved; preserve the existing quality gates and document any future architecture decision before activating database, authentication, integration, or deployment work.
