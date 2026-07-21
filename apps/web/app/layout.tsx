@@ -11,8 +11,8 @@ const notoSansTc = Noto_Sans_TC({
 });
 
 export const metadata: Metadata = {
-  title: "ScaleGate Ledger｜營運工作台",
   description: "地磅、進出場與掩埋作業的可追溯營運工作台。",
+  title: "ScaleGate Ledger｜營運工作台",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -18,13 +18,13 @@ const queue = [
 
 const metrics = [
   {
-    label: "今日進場",
-    value: "28",
-    unit: "車次",
     detail: "其中 17 車次已完成",
+    label: "今日進場",
+    unit: "車次",
+    value: "28",
   },
-  { label: "累計淨重", value: "186.4", unit: "公噸", detail: "靜態展示資料" },
-  { label: "待處理例外", value: "3", unit: "筆", detail: "最久等待 12 分鐘" },
+  { detail: "靜態展示資料", label: "累計淨重", unit: "公噸", value: "186.4" },
+  { detail: "最久等待 12 分鐘", label: "待處理例外", unit: "筆", value: "3" },
 ] as const;
 
 const records = [

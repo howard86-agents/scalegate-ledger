@@ -11,13 +11,15 @@ const DEFAULT_USERS = [
 ];
 
 async function main() {
-  for (const user of DEFAULT_USERS) {
-    await prisma.user.upsert({
-      where: { email: user.email },
-      update: user,
-      create: user,
-    });
-  }
+  await Promise.all(
+    DEFAULT_USERS.map((user) =>
+      prisma.user.upsert({
+        create: user,
+        update: user,
+        where: { email: user.email },
+      })
+    )
+  );
 }
 
 main()
