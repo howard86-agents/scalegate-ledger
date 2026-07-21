@@ -1,5 +1,5 @@
 {
-  "extends": "@workspace-template/typescript-config/base.json",
+  "extends": "@scalegate-ledger/typescript-config/base.json",
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "generated"],
   "compilerOptions": {
