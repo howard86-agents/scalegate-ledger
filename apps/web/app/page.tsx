@@ -1,38 +1,12 @@
-import { appConfig } from "@scalegate-ledger/data";
-
-const queue = [
-  {
-    id: "SG-0713-042",
-    plate: "KLM-5821",
-    state: "等待第一次秤重",
-    tone: "info",
-  },
-  { id: "SG-0713-041", plate: "BQA-1936", state: "場內作業", tone: "success" },
-  {
-    id: "SG-0713-039",
-    plate: "RCE-7305",
-    state: "需人工確認",
-    tone: "warning",
-  },
-] as const;
-
-const metrics = [
-  {
-    label: "今日進場",
-    value: "28",
-    unit: "車次",
-    detail: "其中 17 車次已完成",
-  },
-  { label: "累計淨重", value: "186.4", unit: "公噸", detail: "靜態展示資料" },
-  { label: "待處理例外", value: "3", unit: "筆", detail: "最久等待 12 分鐘" },
-] as const;
-
-const records = [
-  { label: "作業單元", value: "A 區・第 2 期・第 4 層" },
-  { label: "今日填埋量", value: "1,240 m³" },
-  { label: "覆土紀錄", value: "待日結確認" },
-  { label: "人員／機具", value: "8 人・5 台" },
-] as const;
+import {
+  appConfig,
+  presentationFixtureBoundary,
+  presentationFixtureExceptions,
+  presentationFixtureLandfillSummary,
+  presentationFixtureMetrics,
+  presentationFixtureQueue,
+  presentationFixtureWeightChargeSummary,
+} from "@scalegate-ledger/data";
 
 const toneClass = {
   info: "bg-info-50 text-info-700",
@@ -74,11 +48,11 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="max-w-xl text-muted text-sm">
-              {appConfig.description} 目前畫面僅使用靜態展示資料。
+              {appConfig.description} {presentationFixtureBoundary.notice}
             </p>
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {metrics.map((metric) => (
+            {presentationFixtureMetrics.map((metric) => (
               <article
                 className="rounded-lg border border-line bg-panel p-5"
                 key={metric.label}
@@ -109,11 +83,11 @@ export default function HomePage() {
                 </h2>
               </div>
               <span className="rounded-md bg-neutral-100 px-3 py-2 font-semibold text-neutral-700 text-sm">
-                3 車次待追蹤
+                {presentationFixtureQueue.length} 車次待追蹤
               </span>
             </div>
             <div className="divide-y divide-line">
-              {queue.map((visit) => (
+              {presentationFixtureQueue.map((visit) => (
                 <article
                   className="grid gap-3 px-5 py-4 sm:grid-cols-[1fr_1fr_auto] sm:items-center"
                   key={visit.id}
@@ -148,32 +122,50 @@ export default function HomePage() {
             </h2>
             <dl className="mt-5 grid grid-cols-2 gap-4">
               <div>
-                <dt className="text-neutral-300 text-sm">毛重</dt>
+                <dt className="text-neutral-300 text-sm">
+                  {presentationFixtureWeightChargeSummary.gross.label}
+                </dt>
                 <dd className="mt-1 font-bold text-2xl tabular-nums">
-                  18.62 <span className="text-base">t</span>
+                  {presentationFixtureWeightChargeSummary.gross.value}{" "}
+                  <span className="text-base">
+                    {presentationFixtureWeightChargeSummary.gross.unit}
+                  </span>
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-300 text-sm">皮重</dt>
+                <dt className="text-neutral-300 text-sm">
+                  {presentationFixtureWeightChargeSummary.tare.label}
+                </dt>
                 <dd className="mt-1 font-bold text-2xl tabular-nums">
-                  7.84 <span className="text-base">t</span>
+                  {presentationFixtureWeightChargeSummary.tare.value}{" "}
+                  <span className="text-base">
+                    {presentationFixtureWeightChargeSummary.tare.unit}
+                  </span>
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-300 text-sm">淨重</dt>
+                <dt className="text-neutral-300 text-sm">
+                  {presentationFixtureWeightChargeSummary.net.label}
+                </dt>
                 <dd className="mt-1 font-bold text-2xl tabular-nums">
-                  10.78 <span className="text-base">t</span>
+                  {presentationFixtureWeightChargeSummary.net.value}{" "}
+                  <span className="text-base">
+                    {presentationFixtureWeightChargeSummary.net.unit}
+                  </span>
                 </dd>
               </div>
               <div>
-                <dt className="text-neutral-300 text-sm">試算金額</dt>
+                <dt className="text-neutral-300 text-sm">
+                  {presentationFixtureWeightChargeSummary.charge.label}
+                </dt>
                 <dd className="mt-1 font-bold text-2xl tabular-nums">
-                  NT$ 8,624
+                  {presentationFixtureWeightChargeSummary.charge.unit}{" "}
+                  {presentationFixtureWeightChargeSummary.charge.value}
                 </dd>
               </div>
             </dl>
             <p className="mt-6 border-neutral-700 border-t pt-4 text-neutral-300 text-sm">
-              僅示意人員覆核後的重量與費率結果，不代表已連接地磅、開立發票或完成付款。
+              {presentationFixtureWeightChargeSummary.disclaimer}
             </p>
           </section>
         </div>
@@ -188,7 +180,7 @@ export default function HomePage() {
               每日紀錄摘要
             </h2>
             <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-              {records.map((record) => (
+              {presentationFixtureLandfillSummary.map((record) => (
                 <div className="rounded-md bg-surface p-4" key={record.label}>
                   <dt className="font-medium text-muted text-sm">
                     {record.label}
@@ -211,18 +203,15 @@ export default function HomePage() {
               例外與人工覆核
             </h2>
             <ul className="mt-5 space-y-3">
-              <li className="rounded-md border border-warning-200 bg-panel p-4">
-                <p className="font-semibold">SG-0713-039・車次資料不完整</p>
-                <p className="mt-1 text-muted text-sm">
-                  保留原始紀錄，等待具權限人員補充原因與處置。
-                </p>
-              </li>
-              <li className="rounded-md border border-warning-200 bg-panel p-4">
-                <p className="font-semibold">每日覆土紀錄待確認</p>
-                <p className="mt-1 text-muted text-sm">
-                  日結前須完成測量來源與覆核狀態。
-                </p>
-              </li>
+              {presentationFixtureExceptions.map((exception) => (
+                <li
+                  className="rounded-md border border-warning-200 bg-panel p-4"
+                  key={exception.title}
+                >
+                  <p className="font-semibold">{exception.title}</p>
+                  <p className="mt-1 text-muted text-sm">{exception.detail}</p>
+                </li>
+              ))}
             </ul>
           </section>
         </div>
