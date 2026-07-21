@@ -19,7 +19,7 @@
   "devDependencies": {
     "@scalegate-ledger/typescript-config": "*",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.11.24",
+    "@types/node": "^26.1.1",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "tailwindcss": "^4",
