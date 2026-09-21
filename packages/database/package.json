@@ -15,15 +15,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "latest",
     "@prisma/client-runtime-utils": "latest",
     "dotenv": "^17.2.3",
-    "pg": "^8.16.3"
+    "pg": "^8.23.0"
   },
   "devDependencies": {
     "@scalegate-ledger/typescript-config": "*",
-    "@types/pg": "^8.16.0",
+    "@types/pg": "^8.23.1",
     "prisma": "latest",
     "tsx": "4.21.0",
     "typescript": "5.5.4"
